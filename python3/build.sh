@@ -14,3 +14,6 @@ echo image: 192.168.1.5:5000/python3:v3.6
 
 echo 
 echo build ok!!!
+
+
+docker push 192.168.1.5:5000/python3:v3.6

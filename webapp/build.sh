@@ -18,5 +18,12 @@ fi
 echo 
 echo image: 192.168.1.5:5000/starter:v$version
 
+
 echo 
 echo build ok!!!
+
+
+docker push 192.168.1.5:5000/starter:v$version
+echo 
+echo push ok!!!
+

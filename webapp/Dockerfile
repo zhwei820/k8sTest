@@ -21,4 +21,4 @@ RUN chown -R django:django /srv/starter
 
 
 # Execute start script
-CMD ["/srv/start.sh"]
+# CMD ["/srv/start.sh"]
