@@ -55,6 +55,7 @@ spec:
         configMap:
           name: filebeat-config
 
+---
 # -------------- ConfigMap ------------------- #
 
 apiVersion: v1
@@ -73,8 +74,10 @@ data:
 
 # ------------------- Service ------------------- #
 
-kind: Service
+---
+
 apiVersion: v1
+kind: Service
 metadata:
   labels:
     k8s-app: django-app
@@ -85,6 +88,6 @@ spec:
   ports:
     - port: 8000
       targetPort: 8000
-      nodePort: 33000
+      nodePort: 30000
   selector:
     k8s-app: django-app
