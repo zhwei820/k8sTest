@@ -5,7 +5,7 @@ metadata:
   labels:
     k8s-app: django-app
   name: django-app
-  namespace: kube-system
+  namespace: default
 spec:
   replicas: 2
   revisionHistoryLimit: 10
