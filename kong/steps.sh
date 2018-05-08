@@ -40,6 +40,6 @@ docker run --rm \
 
 # dashboard
 
- docker run --rm -p 8080:8080 pgbi/kong-dashboard start \
+ docker run  -p 8080:8080 pgbi/kong-dashboard start \
   --kong-url http://192.168.1.5:8001
   --basic-auth user1=password1 user2=password2
