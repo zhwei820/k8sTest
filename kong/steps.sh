@@ -38,8 +38,17 @@ docker run --rm \
 
  curl -i http://localhost:8001/
 
-# dashboard
+# kong dashboard
 
  docker run  -p 8080:8080 pgbi/kong-dashboard start \
   --kong-url http://192.168.1.5:8001
   --basic-auth user1=password1 user2=password2
+
+# Prometheus
+docker run --name prometheus -d -p 127.0.0.1:9090:9090 quay.io/prometheus/prometheus
+
+
+# kong Prometheus export
+docker run --rm --name kong-prometheus -d -p 127.0.0.1:8900:8080 192.168.1.5:5000/kong-prometheus:v0.1
+
+

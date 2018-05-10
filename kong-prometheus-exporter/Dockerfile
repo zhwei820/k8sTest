@@ -2,7 +2,7 @@
 # and a workspace (GOPATH) configured at /go.
 FROM golang
 WORKDIR /go/src/ytx/kong-prometheus
-ADD . .
+ADD ./ ./
 RUN go get -d
 RUN go install ytx/kong-prometheus
 
