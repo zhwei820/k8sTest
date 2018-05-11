@@ -5,12 +5,11 @@ do
     version=$LINE
 done
 
-env 
+# env = dev/test/prod ...
+# env_var = docker_registry_dev/docker_registry_test/docker_registry_prod ...
 
 env_var=docker_registry_$env
-
 image_registry=`eval echo  '$'$env_var`
-# image_registry=$docker_registry_dev
 
 image_name=$image_registry/starter:v$version.$BUILD_NUMBER
 
