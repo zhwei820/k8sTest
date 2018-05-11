@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ls
 version=""
 for LINE in `cat VERSION`
