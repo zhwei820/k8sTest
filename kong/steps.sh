@@ -45,10 +45,10 @@ docker run --rm \
   --basic-auth user1=password1 user2=password2
 
 # Prometheus
-docker run --name prometheus -d -p 127.0.0.1:9090:9090 quay.io/prometheus/prometheus
+# docker run --name prometheus -d -p 127.0.0.1:9090:9090 quay.io/prometheus/prometheus
 
 
 # kong Prometheus export
-docker run --rm --name kong-prometheus -d -p 127.0.0.1:8900:8080 192.168.1.5:5000/kong-prometheus:v0.1
+docker run --rm --name kong-prometheus -d -p 192.168.1.5:8999:8080 192.168.1.5:5000/kong-prometheus:v0.1
 
 
