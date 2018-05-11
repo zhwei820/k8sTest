@@ -1,11 +1,17 @@
+ls
 version=""
 for LINE in `cat VERSION`
 do   
     version=$LINE
 done
 
+env 
 
-docker build --force-rm -t 192.168.1.5:5000/starter:v$version . 
+image_registry=eval "echo \"\$docker_registry_$env\""
+
+image_name=$image_registry/starter:v$version.$BUILD_NUMBER
+
+docker build --force-rm -t $image_name . 
 
 dangling=`docker images -f "dangling=true" -q`
 echo $dangling
@@ -16,14 +22,14 @@ docker rmi $(docker images -f "dangling=true" -q)
 fi
 
 echo 
-echo image: 192.168.1.5:5000/starter:v$version
+echo image: $image_name
 
 
 echo 
 echo build ok!!!
 
 
-docker push 192.168.1.5:5000/starter:v$version
+docker push $image_name
 echo 
 echo push ok!!!
 
