@@ -7,7 +7,10 @@ done
 
 env 
 
-image_registry=eval "echo \"\$docker_registry_$env\""
+env_var=docker_registry_$env
+
+image_registry=`eval echo  '$'$env_var`
+# image_registry=$docker_registry_dev
 
 image_name=$image_registry/starter:v$version.$BUILD_NUMBER
 
