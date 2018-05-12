@@ -11,12 +11,11 @@ docker run --rm \
     --link kong-database:kong-database \
     -e "KONG_DATABASE=postgres" \
     -e "KONG_PG_HOST=kong-database" \
-    192.168.1.5:5000/kong:v0.13 kong migrations up
-
+    192.168.1.5:5000/kong:v0.12 kong migrations up
 
 # run
 
- docker run -d --name kong \
+docker run -d --name kong \
     --link kong-database:kong-database \
     -e "KONG_DATABASE=postgres" \
     -e "KONG_PG_HOST=kong-database" \
@@ -31,7 +30,7 @@ docker run --rm \
     -p 8443:8443 \
     -p 8001:8001 \
     -p 8444:8444 \
-    192.168.1.5:5000/kong:v0.13
+    192.168.1.5:5000/kong:v0.12
 
 
 # api
@@ -43,12 +42,4 @@ docker run --rm \
  docker run  -p 8080:8080 pgbi/kong-dashboard start \
   --kong-url http://192.168.1.5:8001
   --basic-auth user1=password1 user2=password2
-
-# Prometheus
-# docker run --name prometheus -d -p 127.0.0.1:9090:9090 quay.io/prometheus/prometheus
-
-
-# kong Prometheus export
-docker run --rm --name kong-prometheus -d -p 192.168.1.5:8999:8080 192.168.1.5:5000/kong-prometheus:v0.1
-
 
