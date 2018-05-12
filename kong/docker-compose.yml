@@ -56,6 +56,8 @@ services:
       test: ["CMD-SHELL", "curl -I -s -L http://127.0.0.1:8000 || exit 1"]
       interval: 5s
       retries: 10
+    volumes:
+          - "/data/log:/data/log"
 
 
   kong-dashboard:
@@ -68,3 +70,4 @@ services:
     ports:
       - 8989:8080
     command: start --kong-url http://192.168.1.5:8001  --basic-auth user1=password1 user2=password2
+
