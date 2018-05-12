@@ -1,0 +1,12 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: example-config
+  namespace: default
+data:
+  test1: hello
+  test2: world
+  settings: |-
+    property1=value-1
+    property2=value-2
+    property3=value-3

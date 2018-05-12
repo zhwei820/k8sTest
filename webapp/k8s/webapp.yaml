@@ -1,0 +1,94 @@
+
+kind: Deployment
+apiVersion: apps/v1beta2
+metadata:
+  labels:
+    k8s-app: django-app
+  name: django-app
+  namespace: default
+spec:
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: django-app
+  template:
+    metadata:
+      labels:
+        k8s-app: django-app
+    spec:
+    
+      containers:
+
+      - image: 192.168.1.5:5000/filebeat:v5.6.9
+        name: filebeat
+        volumeMounts:
+        - name: app-logs
+          mountPath: /log
+        - name: filebeat-config
+          mountPath: /etc/filebeat
+
+
+      - name: django-app
+        imagePullPolicy: Always
+        image: 192.168.1.5:5000/starter:v0.0.1
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        volumeMounts:
+          # Create on-disk volume to store logs
+        - mountPath: /data/logs
+          name: app-logs
+        livenessProbe:
+          # httpGet:
+          #   scheme: HTTP
+          #   path: /
+          #   port: 8000
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+
+      volumes:
+      - name: app-logs
+        emptyDir: {}
+      - name: filebeat-config
+        configMap:
+          name: filebeat-config
+
+---
+# -------------- ConfigMap ------------------- #
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-config
+data:
+  filebeat.yml: |
+    filebeat.prospectors:
+    - input_type: log
+      paths:
+        - "/log/*"
+    output.elasticsearch:
+      hosts: ["192.168.1.19:9600"]
+      index: "filebeat-tomcat-shopxx"
+
+# ------------------- Service ------------------- #
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: django-app
+  name: django-app
+  namespace: default
+spec:
+  type: NodePort 
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30000
+  selector:
+    k8s-app: django-app
