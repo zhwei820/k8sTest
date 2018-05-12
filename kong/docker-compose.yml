@@ -13,7 +13,7 @@ services:
       timeout: 5s
       retries: 5
     volumes:
-          - "/var/lib/postgresql:/var/lib/postgresql"
+          - "/var/lib/postgresql/data:/var/lib/postgresql/data"
 
   kong-migration:
     image: 192.168.1.5:5000/kong:v0.12
