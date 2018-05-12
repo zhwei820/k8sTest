@@ -1,10 +1,14 @@
 
 
 mkdir /etc/auth/ -p
+mkdir /var/docker-store -p
 
 docker run --entrypoint htpasswd registry:2 -Bbn myuser mypassword > /etc/auth/htpasswd
 
-docker run -d -p 5000:5000 --restart=always --name registry_private  -v /etc/auth:/auth  -e "REGISTRY_AUTH=htpasswd"  -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm"  -e "REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd"  registry:2
+docker run -d -p 5000:5000 --restart=always --name registry_private  -v /etc/auth:/auth \
+ -e "REGISTRY_AUTH=htpasswd"  -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm"  -e "REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd"  \
+ STORAGE_PATH=/tmp/docker-store -v /tmp/docker-store:/tmp/docker-store \
+ registry:2
 
 
 docker login localhost:5000
