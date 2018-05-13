@@ -11,7 +11,7 @@ docker run -d -p 5000:5000 --restart=always --name registry_private  -v /etc/aut
  registry:2
 
 
-docker login localhost:5000
+# docker login 192.168.1.5:5000
 
 
 docker run -d \
