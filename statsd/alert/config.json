@@ -1,16 +1,16 @@
 {
-   "logging": "info",  
+   "logging": "debug",  
     "critical_handlers": ["log", "smtp"],
     "warning_handlers": ["log", "smtp"],
     "normal_handlers": ["log", "smtp"],
   
     "smtp": {
       "username": "602068971@qq.com",
-      "password": "pjj121604022948",
+      "password": "lbwzoeffcvftbcgi",
       "use_tls": true,
       "host": "smtp.qq.com",
       "port": 587,
-      "from": "me@qq.com",
+      "from": "602068971@qq.com",
       "to": ["602068971@qq.com"]
     },
   
